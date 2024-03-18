@@ -3,8 +3,6 @@ import sys
 import os
 
 
-print(os.system(f"pwd"))
-
 
 os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
 cwd0 = os.getcwd()
