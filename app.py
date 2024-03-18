@@ -583,7 +583,7 @@ def parse_args():
     parser.add_argument('--openpose_checkpoint', default='thibaud/controlnet-openpose-sdxl-1.0', type=str)
     parser.add_argument('--canny_checkpoint', default='diffusers/controlnet-canny-sdxl-1.0', type=str)
     parser.add_argument('--depth_checkpoint', default='diffusers/controlnet-depth-sdxl-1.0', type=str)
-    parser.add_argument('--efficientViT_checkpoint', default='../checkpoint/sam/xl1.pt', type=str)
+    parser.add_argument('--efficientViT_checkpoint', default='./checkpoint/sam/xl1.pt', type=str)
     parser.add_argument('--dino_checkpoint', default='./checkpoint/GroundingDINO', type=str)
     parser.add_argument('--sam_checkpoint', default='./checkpoint/sam/sam_vit_h_4b8939.pth', type=str)
     parser.add_argument('--dpt_checkpoint', default='Intel/dpt-hybrid-midas', type=str)
