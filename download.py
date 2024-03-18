@@ -59,7 +59,7 @@ class OMG_download():
         REPO_ID = 'Fucius/OMG'
         filename_list = ['lora/chris-evans.safetensors', 'lora/Harry_Potter.safetensors', 'lora/Hermione_Granger.safetensors', 'lora/jordan_torres_v2_xl.safetensors', 'lora/keira_lora_sdxl_v1-000008.safetensors', 'lora/lawrence_dh128_v1-step00012000.safetensors', 'lora/Gleb-Savchenko_Liam-Hemsworth.safetensors', 'lora/TaylorSwiftSDXL.safetensors']
         if not os.path.exists('/home/user/app/checkpoint/lora/'):
-            os.makedirs('/home/user/app/checkpoint/lora/)
+            os.makedirs('/home/user/app/checkpoint/lora/')
         for filename in filename_list:
             local_file = os.path.join('/home/user/app/checkpoint/lora/', filename)
 
