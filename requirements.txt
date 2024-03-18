@@ -16,4 +16,3 @@ numpy
 pillow
 gradio==3.36.1
 onnxsim==0.4.35
-git+https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git
