@@ -25,13 +25,13 @@ class OMG_download():
     def download_model_sam(self):
         REPO_ID = 'han-cai/efficientvit-sam'
         filename_list = ['xl1.pt']
-        if not os.path.exists('./checkpoints/sam/'):
-            os.makedirs('./checkpoints/sam/')
+        if not os.path.exists('/home/user/app/checkpoint/sam/'):
+            os.makedirs('/home/user/app/checkpoint/sam/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/sam/', filename)
+            local_file = os.path.join('/home/user/app/checkpoint/sam/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/sam/', local_dir_use_symlinks=False)
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/user/app/checkpoint/sam/', local_dir_use_symlinks=False)
 
     def download_model_yoloworld(self):
         REPO_ID = 'Fucius/OMG'
