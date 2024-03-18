@@ -1,1 +1,8 @@
-gradio==3.36.1
+diffusers==0.25.0
+torch==2.0.1
+torchvision
+transformers==4.36.2
+accelerate
+einops
+onnxruntime-gpu
+peft==0.8.2
