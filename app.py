@@ -3,15 +3,13 @@ import sys
 import os
 
 
-print(os.system(f"pwd"))
 
-
-os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
-cwd0 = os.getcwd()
-cwd1 = os.path.join(cwd0, "yolo-world-with-efficientvit-sam")
-os.chdir(cwd1)
-os.system("make setup")
-os.system(f"cd /home/user/app")
+# os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
+# cwd0 = os.getcwd()
+# cwd1 = os.path.join(cwd0, "yolo-world-with-efficientvit-sam")
+# os.chdir(cwd1)
+# os.system("make setup")
+# os.system(f"cd /home/user/app")
 
 sys.path.append('./')
 import gradio as gr
@@ -307,10 +305,10 @@ def resize_and_center_crop(image, output_size=(1024, 576)):
 def main(device, segment_type):
     pipe, controller, pipe_concept = build_model_sd(args.pretrained_sdxl_model, args.openpose_checkpoint, device, prompts_tmp)
 
-    if segment_type == 'GroundingDINO':
-        detect_model, sam = build_dino_segment_model(args.dino_checkpoint, args.sam_checkpoint)
-    else:
-        detect_model, sam = build_yolo_segment_model(args.efficientViT_checkpoint, device)
+    # if segment_type == 'GroundingDINO':
+    #     detect_model, sam = build_dino_segment_model(args.dino_checkpoint, args.sam_checkpoint)
+    # else:
+    #     detect_model, sam = build_yolo_segment_model(args.efficientViT_checkpoint, device)
 
     resolution_list = ["1440*728",
                        "1344*768",
@@ -500,6 +498,7 @@ def main(device, segment_type):
 
     @spaces.GPU
     def generate(prompt):
+        print(os.system(f"pwd"))
         return pipe(prompt).images
 
     gr.Interface(
@@ -512,15 +511,15 @@ def main(device, segment_type):
     #     # description
     #     gr.Markdown(title)
     #     gr.Markdown(description)
-    # 
+    #
     #     with gr.Row():
     #         gallery = gr.Image(label="Generated Images", height=512, width=512)
     #         gen_condition = gr.Image(label="Spatial Condition", height=512, width=512)
     #         usage_tips = gr.Markdown(label="Usage tips of OMG", value=tips, visible=False)
-    # 
+    #
     #     with gr.Row():
     #         condition_img1 = gr.Image(label="Input an RGB image for condition", height=128, width=128)
-    # 
+    #
     #     # character choose
     #     with gr.Row():
     #         man = gr.Dropdown(label="Character 1 selection", choices=CHARACTER_MAN_NAMES, value="Chris Evans (identifier: Chris Evans)")
@@ -528,7 +527,7 @@ def main(device, segment_type):
     #         resolution = gr.Dropdown(label="Image Resolution (width*height)", choices=resolution_list, value="1024*1024")
     #         condition = gr.Dropdown(label="Input condition type", choices=condition_list, value="None")
     #         style = gr.Dropdown(label="style", choices=STYLE_NAMES, value="None")
-    # 
+    #
     #     with gr.Row():
     #         local_prompt1 = gr.Textbox(label="Character1_prompt",
     #                             info="Describe the Character 1, this prompt should include the identifier of character 1",
@@ -536,18 +535,18 @@ def main(device, segment_type):
     #         local_prompt2 = gr.Textbox(label="Character2_prompt",
     #                                    info="Describe the Character 2, this prompt should include the identifier of character2",
     #                                    value="Close-up photo of the TaylorSwift, 35mm photograph, film, professional, 4k, highly detailed.")
-    # 
+    #
     #     man.change(get_local_value_man, man, local_prompt1)
     #     woman.change(get_local_value_woman, woman, local_prompt2)
-    # 
+    #
     #     # prompt
     #     with gr.Column():
     #         prompt = gr.Textbox(label="Prompt 1",
     #                             info="Give a simple prompt to describe the first image content",
     #                             placeholder="Required",
     #                             value="close-up shot, photography, a man and a woman on the street, facing the camera smiling")
-    # 
-    # 
+    #
+    #
     #     with gr.Accordion(open=False, label="Advanced Options"):
     #         seed = gr.Slider(
     #             label="Seed",
@@ -560,9 +559,9 @@ def main(device, segment_type):
     #                             placeholder="noisy, blurry, soft, deformed, ugly",
     #                             value="noisy, blurry, soft, deformed, ugly")
     #         randomize_seed = gr.Checkbox(label="Randomize seed", value=True)
-    # 
+    #
     #     submit = gr.Button("Submit", variant="primary")
-    # 
+    #
     #     submit.click(
     #         fn=remove_tips,
     #         outputs=usage_tips,
