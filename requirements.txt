@@ -10,3 +10,7 @@ opencv-python==4.7.0.68
 controlnet-aux==0.0.7
 xformers==0.0.21
 insightface
+spaces==0.19.4
+segment-anything
+gradio==3.36.1
+inference[yolo-world]==0.9.13
