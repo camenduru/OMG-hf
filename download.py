@@ -46,13 +46,13 @@ class OMG_download():
     def download_controlNet(self):
         REPO_ID = 'lllyasviel/ControlNet'
         filename_list = ['annotator/ckpts/body_pose_model.pth']
-        if not os.path.exists('./checkpoints/ControlNet/'):
-            os.makedirs('./checkpoints/ControlNet/')
+        if not os.path.exists('/home/user/app/checkpoint/ControlNet/'):
+            os.makedirs('/home/user/app/checkpoint/ControlNet/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/ControlNet/', filename)
+            local_file = os.path.join('/home/user/app/checkpoint/ControlNet/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/ControlNet/',
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/user/app/checkpoint/ControlNet/',
                                 local_dir_use_symlinks=False)
 
     def download_characters(self):
