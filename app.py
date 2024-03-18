@@ -8,6 +8,7 @@ pipe.to('cuda')
 
 @spaces.GPU
 def generate(prompt):
+    
     return pipe(prompt).images
 
 gr.Interface(
