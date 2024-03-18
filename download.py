@@ -58,24 +58,24 @@ class OMG_download():
     def download_characters(self):
         REPO_ID = 'Fucius/OMG'
         filename_list = ['lora/chris-evans.safetensors', 'lora/Harry_Potter.safetensors', 'lora/Hermione_Granger.safetensors', 'lora/jordan_torres_v2_xl.safetensors', 'lora/keira_lora_sdxl_v1-000008.safetensors', 'lora/lawrence_dh128_v1-step00012000.safetensors', 'lora/Gleb-Savchenko_Liam-Hemsworth.safetensors', 'lora/TaylorSwiftSDXL.safetensors']
-        if not os.path.exists('./checkpoints/'):
-            os.makedirs('./checkpoints/')
+        if not os.path.exists('/home/user/app/checkpoint/lora/'):
+            os.makedirs('/home/user/app/checkpoint/lora/)
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/', filename)
+            local_file = os.path.join('/home/user/app/checkpoint/lora/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/',
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/user/app/checkpoint/lora/',
                                 local_dir_use_symlinks=False)
     def download_styles(self):
         REPO_ID = 'Fucius/OMG'
         filename_list = ['style/EldritchPaletteKnife.safetensors', 'style/Cinematic Hollywood Film.safetensors', 'style/Anime_Sketch_SDXL.safetensors']
-        if not os.path.exists('./checkpoints/'):
-            os.makedirs('./checkpoints/')
+        if not os.path.exists('/home/user/app/checkpoint/lora/style/'):
+            os.makedirs('/home/user/app/checkpoint/lora/style/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/', filename)
+            local_file = os.path.join('/home/user/app/checkpoint/lora/style/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/',
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/user/app/checkpoint/lora/style/',
                                 local_dir_use_symlinks=False)
 
 if __name__ == '__main__':
