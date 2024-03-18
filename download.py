@@ -1,7 +1,7 @@
 import os
 import time
 import torch
-os.environ['HF_ENDPOINT']="https://hf-mirror.com"
+# os.environ['HF_ENDPOINT']="https://hf-mirror.com"
 from huggingface_hub import hf_hub_download
 
 class OMG_download():
