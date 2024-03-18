@@ -2,7 +2,9 @@ import spaces
 import sys
 import os
 
+
 print(os.system(f"pwd"))
+a = 1/0
 
 os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
 cwd0 = os.getcwd()
