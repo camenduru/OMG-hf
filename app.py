@@ -2,7 +2,6 @@ import spaces
 import sys
 import os
 
-sys.path.append('./')
 import gradio as gr
 import random
 import numpy as np
