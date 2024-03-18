@@ -6,3 +6,4 @@ accelerate
 einops
 onnxruntime-gpu
 peft==0.8.2
+opencv-python==4.7.0.68
