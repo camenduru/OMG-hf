@@ -12,7 +12,7 @@ cwd1 = os.path.join(cwd0, "yolo-world-with-efficientvit-sam")
 os.chdir(cwd1)
 os.system("make setup")
 os.system("python app.py")
-os.chdir(cwd0)
+print(os.system(f"cd /home/user/app"))
 
 sys.path.append('./')
 import gradio as gr
