@@ -1,7 +1,7 @@
 import os
 import time
 import torch
-# os.environ['HF_ENDPOINT']="https://hf-mirror.com"
+#os.environ['HF_ENDPOINT']="https://hf-mirror.com"
 from huggingface_hub import hf_hub_download
 
 class OMG_download():
@@ -25,13 +25,13 @@ class OMG_download():
     def download_model_sam(self):
         REPO_ID = 'han-cai/efficientvit-sam'
         filename_list = ['xl1.pt']
-        if not os.path.exists('/home/user/app/checkpoint/sam//'):
-            os.makedirs('/home/user/app/checkpoint/sam//')
+        if not os.path.exists('./checkpoints/sam/'):
+            os.makedirs('./checkpoints/sam/')
         for filename in filename_list:
-            local_file = os.path.join('/home/user/app/checkpoint/sam/', filename)
+            local_file = os.path.join('./checkpoints/sam/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='/home/user/app/checkpoint/sam/', local_dir_use_symlinks=False)
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/sam/', local_dir_use_symlinks=False)
 
     def download_model_yoloworld(self):
         REPO_ID = 'Fucius/OMG'
@@ -58,24 +58,24 @@ class OMG_download():
     def download_characters(self):
         REPO_ID = 'Fucius/OMG'
         filename_list = ['lora/chris-evans.safetensors', 'lora/Harry_Potter.safetensors', 'lora/Hermione_Granger.safetensors', 'lora/jordan_torres_v2_xl.safetensors', 'lora/keira_lora_sdxl_v1-000008.safetensors', 'lora/lawrence_dh128_v1-step00012000.safetensors', 'lora/Gleb-Savchenko_Liam-Hemsworth.safetensors', 'lora/TaylorSwiftSDXL.safetensors']
-        if not os.path.exists('./checkpoints/lora/'):
-            os.makedirs('./checkpoints/lora/')
+        if not os.path.exists('./checkpoints/'):
+            os.makedirs('./checkpoints/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/lora/', filename)
+            local_file = os.path.join('./checkpoints/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/lora/',
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/',
                                 local_dir_use_symlinks=False)
     def download_styles(self):
         REPO_ID = 'Fucius/OMG'
         filename_list = ['style/EldritchPaletteKnife.safetensors', 'style/Cinematic Hollywood Film.safetensors', 'style/Anime_Sketch_SDXL.safetensors']
-        if not os.path.exists('./checkpoints/style/'):
-            os.makedirs('./checkpoints/style/')
+        if not os.path.exists('./checkpoints/'):
+            os.makedirs('./checkpoints/')
         for filename in filename_list:
-            local_file = os.path.join('./checkpoints/style/', filename)
+            local_file = os.path.join('./checkpoints/', filename)
 
             if not os.path.exists(local_file):
-                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/style/',
+                hf_hub_download(repo_id=REPO_ID, filename=filename, local_dir='./checkpoints/',
                                 local_dir_use_symlinks=False)
 
 if __name__ == '__main__':
