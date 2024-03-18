@@ -12,4 +12,7 @@ xformers==0.0.21
 insightface
 spaces==0.19.4
 segment-anything
+numpy
+pillow
 gradio==3.36.1
+onnxsim==0.4.35
