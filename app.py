@@ -3,7 +3,7 @@ import sys
 import os
 
 
-
+print(os.getcwd())
 # os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
 # cwd0 = os.getcwd()
 # cwd1 = os.path.join(cwd0, "yolo-world-with-efficientvit-sam")
