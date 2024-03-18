@@ -7,3 +7,6 @@ einops
 onnxruntime-gpu
 peft==0.8.2
 opencv-python==4.7.0.68
+controlnet-aux==0.0.7
+xformers==0.0.21
+insightface
