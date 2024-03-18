@@ -3,7 +3,6 @@ import sys
 import os
 
 
-print(os.getcwd())
 # os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
 # cwd0 = os.getcwd()
 # cwd1 = os.path.join(cwd0, "yolo-world-with-efficientvit-sam")
@@ -53,7 +52,7 @@ from src.pipelines.lora_pipeline import LoraMultiConceptPipeline
 from src.prompt_attention.p2p_attention import AttentionReplace
 from diffusers import ControlNetModel, StableDiffusionXLPipeline
 from src.pipelines.lora_pipeline import revise_regionally_controlnet_forward
-
+print(os.getcwd())
 from download import OMG_download
 
 CHARACTER_MAN_NAMES = list(character_man.keys())
