@@ -1,7 +1,6 @@
 diffusers==0.25.0
 torch==2.0.1
 torchvision
-transformers
 accelerate
 einops
 onnxruntime-gpu
