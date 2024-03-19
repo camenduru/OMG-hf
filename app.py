@@ -63,8 +63,8 @@ title = r"""
 """
 
 description = r"""
-<b>Official 🤗 Gradio demo</b> for <a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>OMG: Occlusion-friendly Personalized Multi-concept Generation In Diffusion Models</b></a>.<be>
-<a href='https://kongzhecn.github.io/omg-project/' target='_blank'><b>Project</b></a>.<a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>Code</b></a>.<a href='https://arxiv.org/abs/2403.10983/' target='_blank'><b>Arxiv</b></a>.<br>
+<b>Official 🤗 Gradio demo</b> for <a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>OMG: Occlusion-friendly Personalized Multi-concept Generation In Diffusion Models</b></a>.<be>.<br>
+<a href='https://kongzhecn.github.io/omg-project/' target='_blank'><b>[Project]</b></a>.<a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>[Code]</b></a>.<a href='https://arxiv.org/abs/2403.10983/' target='_blank'><b>[Arxiv]</b></a>.<br>
 How to use:<br>
 1. Select two characters.
 2. Enter a text prompt as done in normal text-to-image models.
