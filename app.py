@@ -27,12 +27,12 @@ from diffusers.utils import load_image
 import cv2
 from PIL import Image, ImageOps
 from transformers import DPTFeatureExtractor, DPTForDepthEstimation
-# from controlnet_aux import OpenposeDetector
+from controlnet_aux import OpenposeDetector
 # from controlnet_aux.open_pose.body import Body
 
 
 from inference.models import YOLOWorld
-# from src.efficientvit.models.efficientvit.sam import EfficientViTSamPredictor
+from src.efficientvit.models.efficientvit.sam import EfficientViTSamPredictor
 from src.efficientvit.sam_model_zoo import create_sam_model
 import supervision as sv
 
