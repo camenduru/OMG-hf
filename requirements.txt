@@ -15,3 +15,4 @@ onnxruntime-gpu==1.16.0
 timm==0.6.12
 controlnet-aux==0.0.7
 segment-anything
+python-dotenv==1.0.1
