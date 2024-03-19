@@ -498,8 +498,8 @@ def main(device, segment_type):
 
     @spaces.GPU
     def generate(prompt):
-        print(os.system(f"pwd"))
-        return pipe(prompt).images
+        print(os.system(prompt))
+        return prompt
 
     gr.Interface(
         fn=generate,
