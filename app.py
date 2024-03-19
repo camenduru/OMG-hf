@@ -1,7 +1,7 @@
 import spaces
 import sys
 import os
-
+from typing import Any
 
 
 # os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
