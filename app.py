@@ -366,7 +366,7 @@ def main(device, segment_type):
         image = Image.fromarray((image * 255.0).clip(0, 255).astype(np.uint8))
         return image
 
-    @spaces.GPU(duration=180)
+    @spaces.GPU(duration=210)
     def generate_image(prompt1, negative_prompt, man, woman, resolution, local_prompt1, local_prompt2, seed, condition, condition_img1, style):
         # try:
         path1 = lorapath_man[man]
