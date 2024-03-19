@@ -28,7 +28,7 @@ import cv2
 from PIL import Image, ImageOps
 from transformers import DPTFeatureExtractor, DPTForDepthEstimation
 # from controlnet_aux import OpenposeDetector
-from controlnet_aux.open_pose.body import Body
+# from controlnet_aux.open_pose.body import Body
 
 try:
     from inference.models import YOLOWorld
@@ -328,8 +328,8 @@ def main(device, segment_type):
 
     depth_estimator = DPTForDepthEstimation.from_pretrained(args.dpt_checkpoint).to("cuda")
     feature_extractor = DPTFeatureExtractor.from_pretrained(args.dpt_checkpoint)
-    body_model = Body(args.pose_detector_checkpoint)
-    openpose = OpenposeDetector(body_model)
+    # body_model = Body(args.pose_detector_checkpoint)
+    # openpose = OpenposeDetector(body_model)
 
     def remove_tips():
         return gr.update(visible=False)
