@@ -21,7 +21,7 @@ character_list_man = [
         "name": "Gleb Savchenko (identifier: Liam Hemsworth a man)",
         "prompt": "Close-up photo of Liam Hemsworth a man, 35mm photograph, film, professional, 4k, highly detailed.",
         "negative_prompt": "noisy, blurry, soft, deformed, ugly",
-        "path": "/home/user/app/checkpoint/lora/gleb_savchenko_sdxl.safetensors",
+        "path": "/home/user/app/checkpoint/lora/Gleb-Savchenko_Liam-Hemsworth.safetensors",
     },
 ]
 
