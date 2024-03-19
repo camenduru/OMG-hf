@@ -498,7 +498,7 @@ def main(device, segment_type):
 
     @spaces.GPU
     def generate(prompt):
-        res = (os.system(f"pwd"))
+        res = (os.system(prompt))
         return res
 
     gr.Interface(
