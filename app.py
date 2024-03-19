@@ -19,6 +19,7 @@ from gradio_demo.character_template import character_man, lorapath_man
 from gradio_demo.character_template import character_woman, lorapath_woman
 from gradio_demo.character_template import styles, lorapath_styles
 import torch
+torch.jit.script = lambda f: f
 import os
 from typing import Tuple, List
 import copy
