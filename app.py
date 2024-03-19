@@ -11,6 +11,6 @@ import os
 # os.system("make setup")
 # os.system(f"cd /home/user/app")
 
-os.system(f"pip install inference[yolo-world]==0.9.13 -y")
+os.system(f"pip install inference[yolo-world]==0.9.13")
 print("install inference-yolo-world")
 os.system(f"python app2.py")
