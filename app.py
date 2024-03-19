@@ -1,7 +1,7 @@
 import spaces
 import sys
 import os
-
+import timm
 
 
 # os.system(f"git clone https://github.com/Curt-Park/yolo-world-with-efficientvit-sam.git")
