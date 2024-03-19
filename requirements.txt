@@ -17,3 +17,4 @@ controlnet-aux==0.0.7
 segment-anything
 python-dotenv==1.0.1
 supervision==0.18.0
+requests-toolbelt==1.0.0
