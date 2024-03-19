@@ -301,10 +301,10 @@ def resize_and_center_crop(image, output_size=(1024, 576)):
 def main(device, segment_type):
     pipe, controller, pipe_concept = build_model_sd(args.pretrained_sdxl_model, args.openpose_checkpoint, device, prompts_tmp)
 
-    # if segment_type == 'GroundingDINO':
-    #     detect_model, sam = build_dino_segment_model(args.dino_checkpoint, args.sam_checkpoint)
-    # else:
-    #     detect_model, sam = build_yolo_segment_model(args.efficientViT_checkpoint, device)
+    if segment_type == 'GroundingDINO':
+        detect_model, sam = build_dino_segment_model(args.dino_checkpoint, args.sam_checkpoint)
+    else:
+        detect_model, sam = build_yolo_segment_model(args.efficientViT_checkpoint, device)
 
     resolution_list = ["1440*728",
                        "1344*768",
@@ -324,8 +324,8 @@ def main(device, segment_type):
 
     depth_estimator = DPTForDepthEstimation.from_pretrained(args.dpt_checkpoint).to("cuda")
     feature_extractor = DPTFeatureExtractor.from_pretrained(args.dpt_checkpoint)
-    # body_model = Body(args.pose_detector_checkpoint)
-    # openpose = OpenposeDetector(body_model)
+    body_model = Body(args.pose_detector_checkpoint)
+    openpose = OpenposeDetector(body_model)
 
     def remove_tips():
         return gr.update(visible=False)
