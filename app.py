@@ -372,75 +372,103 @@ def main(device, segment_type):
 
     @spaces.GPU
     def generate_image(prompt1, negative_prompt, man, woman, resolution, local_prompt1, local_prompt2, seed, condition, condition_img1, style):
-        try:
-            path1 = lorapath_man[man]
-            path2 = lorapath_woman[woman]
-            pipe_concept.unload_lora_weights()
-            pipe.unload_lora_weights()
-            pipe_list = build_model_lora(pipe_concept, path1 + "|" + path2, lorapath_styles[style], condition, args, pipe)
+        # try:
+        path1 = lorapath_man[man]
+        path2 = lorapath_woman[woman]
+        pipe_concept.unload_lora_weights()
+        pipe.unload_lora_weights()
+        pipe_list = build_model_lora(pipe_concept, path1 + "|" + path2, lorapath_styles[style], condition, args, pipe)
 
-            if lorapath_styles[style] is not None and os.path.exists(lorapath_styles[style]):
-                styleL = True
-            else:
-                styleL = False
+        if lorapath_styles[style] is not None and os.path.exists(lorapath_styles[style]):
+            styleL = True
+        else:
+            styleL = False
 
-            input_list = [prompt1]
-            condition_list = [condition_img1]
-            output_list = []
+        input_list = [prompt1]
+        condition_list = [condition_img1]
+        output_list = []
 
-            width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
+        width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
 
-            kwargs = {
-                'height': height,
-                'width': width,
-            }
+        kwargs = {
+            'height': height,
+            'width': width,
+        }
 
-            for prompt, condition_img in zip(input_list, condition_list):
-                if prompt!='':
-                    input_prompt = []
-                    p = '{prompt}, 35mm photograph, film, professional, 4k, highly detailed.'
-                    if styleL:
-                        p = styles[style] + p
-                    input_prompt.append([p.replace("{prompt}", prompt), p.replace("{prompt}", prompt)])
-                    if styleL:
-                        input_prompt.append([(styles[style] + local_prompt1, character_man.get(man)[1]),
-                                             (styles[style] + local_prompt2, character_woman.get(woman)[1])])
-                    else:
-                        input_prompt.append([(local_prompt1, character_man.get(man)[1]),
-                                             (local_prompt2, character_woman.get(woman)[1])])
+        for prompt, condition_img in zip(input_list, condition_list):
+            if prompt!='':
+                input_prompt = []
+                p = '{prompt}, 35mm photograph, film, professional, 4k, highly detailed.'
+                if styleL:
+                    p = styles[style] + p
+                input_prompt.append([p.replace("{prompt}", prompt), p.replace("{prompt}", prompt)])
+                if styleL:
+                    input_prompt.append([(styles[style] + local_prompt1, character_man.get(man)[1]),
+                                         (styles[style] + local_prompt2, character_woman.get(woman)[1])])
+                else:
+                    input_prompt.append([(local_prompt1, character_man.get(man)[1]),
+                                         (local_prompt2, character_woman.get(woman)[1])])
 
-                    if condition == 'Human pose' and condition_img is not None:
-                        index = ratio_list.index(
-                            min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
-                        resolution = resolution_list[index]
-                        width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
-                        kwargs['height'] = height
-                        kwargs['width'] = width
-                        condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
-                        spatial_condition = get_humanpose(condition_img)
-                    elif condition == 'Canny Edge' and condition_img is not None:
-                        index = ratio_list.index(
-                            min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
-                        resolution = resolution_list[index]
-                        width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
-                        kwargs['height'] = height
-                        kwargs['width'] = width
-                        condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
-                        spatial_condition = get_cannyedge(condition_img)
-                    elif condition == 'Depth' and condition_img is not None:
-                        index = ratio_list.index(
-                            min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
-                        resolution = resolution_list[index]
-                        width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
-                        kwargs['height'] = height
-                        kwargs['width'] = width
-                        condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
-                        spatial_condition = get_depth(condition_img)
-                    else:
-                        spatial_condition = None
+                if condition == 'Human pose' and condition_img is not None:
+                    index = ratio_list.index(
+                        min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
+                    resolution = resolution_list[index]
+                    width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
+                    kwargs['height'] = height
+                    kwargs['width'] = width
+                    condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
+                    spatial_condition = get_humanpose(condition_img)
+                elif condition == 'Canny Edge' and condition_img is not None:
+                    index = ratio_list.index(
+                        min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
+                    resolution = resolution_list[index]
+                    width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
+                    kwargs['height'] = height
+                    kwargs['width'] = width
+                    condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
+                    spatial_condition = get_cannyedge(condition_img)
+                elif condition == 'Depth' and condition_img is not None:
+                    index = ratio_list.index(
+                        min(ratio_list, key=lambda x: abs(x - condition_img.shape[1] / condition_img.shape[0])))
+                    resolution = resolution_list[index]
+                    width, height = int(resolution.split("*")[0]), int(resolution.split("*")[1])
+                    kwargs['height'] = height
+                    kwargs['width'] = width
+                    condition_img = resize_and_center_crop(Image.fromarray(condition_img), (width, height))
+                    spatial_condition = get_depth(condition_img)
+                else:
+                    spatial_condition = None
 
-                    kwargs['spatial_condition'] = spatial_condition
-                    controller.reset()
+                kwargs['spatial_condition'] = spatial_condition
+                controller.reset()
+                image = sample_image(
+                    pipe,
+                    input_prompt=input_prompt,
+                    concept_models=pipe_concept,
+                    input_neg_prompt=[negative_prompt] * len(input_prompt),
+                    generator=torch.Generator(device).manual_seed(seed),
+                    controller=controller,
+                    stage=1,
+                    lora_list=pipe_list,
+                    styleL=styleL,
+                    **kwargs)
+
+                controller.reset()
+                if pipe.tokenizer("man")["input_ids"][1] in pipe.tokenizer(args.prompt)["input_ids"][1:-1]:
+                    mask1 = predict_mask(detect_model, sam, image[0], 'man', args.segment_type, confidence=0.15,
+                                         threshold=0.5)
+                else:
+                    mask1 = None
+
+                if pipe.tokenizer("woman")["input_ids"][1] in pipe.tokenizer(args.prompt)["input_ids"][1:-1]:
+                    mask2 = predict_mask(detect_model, sam, image[0], 'woman', args.segment_type, confidence=0.15,
+                                         threshold=0.5)
+                else:
+                    mask2 = None
+
+                if mask1 is None and mask2 is None:
+                    output_list.append(image[1])
+                else:
                     image = sample_image(
                         pipe,
                         input_prompt=input_prompt,
@@ -448,47 +476,19 @@ def main(device, segment_type):
                         input_neg_prompt=[negative_prompt] * len(input_prompt),
                         generator=torch.Generator(device).manual_seed(seed),
                         controller=controller,
-                        stage=1,
+                        stage=2,
+                        region_masks=[mask1, mask2],
                         lora_list=pipe_list,
                         styleL=styleL,
                         **kwargs)
-
-                    controller.reset()
-                    if pipe.tokenizer("man")["input_ids"][1] in pipe.tokenizer(args.prompt)["input_ids"][1:-1]:
-                        mask1 = predict_mask(detect_model, sam, image[0], 'man', args.segment_type, confidence=0.15,
-                                             threshold=0.5)
-                    else:
-                        mask1 = None
-
-                    if pipe.tokenizer("woman")["input_ids"][1] in pipe.tokenizer(args.prompt)["input_ids"][1:-1]:
-                        mask2 = predict_mask(detect_model, sam, image[0], 'woman', args.segment_type, confidence=0.15,
-                                             threshold=0.5)
-                    else:
-                        mask2 = None
-
-                    if mask1 is None and mask2 is None:
-                        output_list.append(image[1])
-                    else:
-                        image = sample_image(
-                            pipe,
-                            input_prompt=input_prompt,
-                            concept_models=pipe_concept,
-                            input_neg_prompt=[negative_prompt] * len(input_prompt),
-                            generator=torch.Generator(device).manual_seed(seed),
-                            controller=controller,
-                            stage=2,
-                            region_masks=[mask1, mask2],
-                            lora_list=pipe_list,
-                            styleL=styleL,
-                            **kwargs)
-                        output_list.append(image[1])
-                else:
-                    output_list.append(None)
-            output_list.append(spatial_condition)
-            return output_list
-        except:
-            print("error")
-            return
+                    output_list.append(image[1])
+            else:
+                output_list.append(None)
+        output_list.append(spatial_condition)
+        return output_list
+        # except:
+        #     print("error")
+        #     return
 
     def get_local_value_man(input):
         return character_man[input][0]
