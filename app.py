@@ -30,13 +30,13 @@ from transformers import DPTFeatureExtractor, DPTForDepthEstimation
 # from controlnet_aux import OpenposeDetector
 # from controlnet_aux.open_pose.body import Body
 
-try:
-    from inference.models import YOLOWorld
-    from src.efficientvit.models.efficientvit.sam import EfficientViTSamPredictor
-    from src.efficientvit.sam_model_zoo import create_sam_model
-    import supervision as sv
-except:
-    print("YoloWorld can not be load")
+# try:
+from inference.models import YOLOWorld
+from src.efficientvit.models.efficientvit.sam import EfficientViTSamPredictor
+from src.efficientvit.sam_model_zoo import create_sam_model
+import supervision as sv
+# except:
+#     print("YoloWorld can not be load")
 
 try:
     from groundingdino.models import build_model
