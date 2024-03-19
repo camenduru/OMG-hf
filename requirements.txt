@@ -16,3 +16,4 @@ numpy
 pillow
 gradio==3.36.1
 onnxsim==0.4.35
+controlnet-aux==0.0.7
