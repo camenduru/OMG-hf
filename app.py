@@ -496,87 +496,87 @@ def main(device, segment_type):
     def get_local_value_woman(input):
         return character_woman[input][0]
 
-    # @spaces.GPU
-    # def generate(prompt):
-    #     print(os.system(f"pwd"))
-    #     return pipe(prompt).images
+    @spaces.GPU
+    def generate(prompt):
+        res = (os.system(f"pwd"))
+        return res
 
-    # gr.Interface(
-    #     fn=generate,
-    #     inputs=gr.Text(),
-    #     outputs=gr.Gallery(),
-    # ).launch()
+    gr.Interface(
+        fn=generate,
+        inputs=gr.Text(),
+        outputs=gr.Text(),
+    ).launch()
 
-    with gr.Blocks(css=css) as demo:
-        # description
-        gr.Markdown(title)
-        gr.Markdown(description)
+    # with gr.Blocks(css=css) as demo:
+    #     # description
+    #     gr.Markdown(title)
+    #     gr.Markdown(description)
     
-        with gr.Row():
-            gallery = gr.Image(label="Generated Images", height=512, width=512)
-            gen_condition = gr.Image(label="Spatial Condition", height=512, width=512)
-            usage_tips = gr.Markdown(label="Usage tips of OMG", value=tips, visible=False)
+    #     with gr.Row():
+    #         gallery = gr.Image(label="Generated Images", height=512, width=512)
+    #         gen_condition = gr.Image(label="Spatial Condition", height=512, width=512)
+    #         usage_tips = gr.Markdown(label="Usage tips of OMG", value=tips, visible=False)
     
-        with gr.Row():
-            condition_img1 = gr.Image(label="Input an RGB image for condition", height=128, width=128)
+    #     with gr.Row():
+    #         condition_img1 = gr.Image(label="Input an RGB image for condition", height=128, width=128)
     
-        # character choose
-        with gr.Row():
-            man = gr.Dropdown(label="Character 1 selection", choices=CHARACTER_MAN_NAMES, value="Chris Evans (identifier: Chris Evans)")
-            woman = gr.Dropdown(label="Character 2 selection", choices=CHARACTER_WOMAN_NAMES, value="Taylor Swift (identifier: TaylorSwift)")
-            resolution = gr.Dropdown(label="Image Resolution (width*height)", choices=resolution_list, value="1024*1024")
-            condition = gr.Dropdown(label="Input condition type", choices=condition_list, value="None")
-            style = gr.Dropdown(label="style", choices=STYLE_NAMES, value="None")
+    #     # character choose
+    #     with gr.Row():
+    #         man = gr.Dropdown(label="Character 1 selection", choices=CHARACTER_MAN_NAMES, value="Chris Evans (identifier: Chris Evans)")
+    #         woman = gr.Dropdown(label="Character 2 selection", choices=CHARACTER_WOMAN_NAMES, value="Taylor Swift (identifier: TaylorSwift)")
+    #         resolution = gr.Dropdown(label="Image Resolution (width*height)", choices=resolution_list, value="1024*1024")
+    #         condition = gr.Dropdown(label="Input condition type", choices=condition_list, value="None")
+    #         style = gr.Dropdown(label="style", choices=STYLE_NAMES, value="None")
     
-        with gr.Row():
-            local_prompt1 = gr.Textbox(label="Character1_prompt",
-                                info="Describe the Character 1, this prompt should include the identifier of character 1",
-                                value="Close-up photo of the Chris Evans, 35mm photograph, film, professional, 4k, highly detailed.")
-            local_prompt2 = gr.Textbox(label="Character2_prompt",
-                                       info="Describe the Character 2, this prompt should include the identifier of character2",
-                                       value="Close-up photo of the TaylorSwift, 35mm photograph, film, professional, 4k, highly detailed.")
+    #     with gr.Row():
+    #         local_prompt1 = gr.Textbox(label="Character1_prompt",
+    #                             info="Describe the Character 1, this prompt should include the identifier of character 1",
+    #                             value="Close-up photo of the Chris Evans, 35mm photograph, film, professional, 4k, highly detailed.")
+    #         local_prompt2 = gr.Textbox(label="Character2_prompt",
+    #                                    info="Describe the Character 2, this prompt should include the identifier of character2",
+    #                                    value="Close-up photo of the TaylorSwift, 35mm photograph, film, professional, 4k, highly detailed.")
     
-        man.change(get_local_value_man, man, local_prompt1)
-        woman.change(get_local_value_woman, woman, local_prompt2)
+    #     man.change(get_local_value_man, man, local_prompt1)
+    #     woman.change(get_local_value_woman, woman, local_prompt2)
     
-        # prompt
-        with gr.Column():
-            prompt = gr.Textbox(label="Prompt 1",
-                                info="Give a simple prompt to describe the first image content",
-                                placeholder="Required",
-                                value="close-up shot, photography, a man and a woman on the street, facing the camera smiling")
+    #     # prompt
+    #     with gr.Column():
+    #         prompt = gr.Textbox(label="Prompt 1",
+    #                             info="Give a simple prompt to describe the first image content",
+    #                             placeholder="Required",
+    #                             value="close-up shot, photography, a man and a woman on the street, facing the camera smiling")
     
     
-        with gr.Accordion(open=False, label="Advanced Options"):
-            seed = gr.Slider(
-                label="Seed",
-                minimum=0,
-                maximum=MAX_SEED,
-                step=1,
-                value=42,
-            )
-            negative_prompt = gr.Textbox(label="Negative Prompt",
-                                placeholder="noisy, blurry, soft, deformed, ugly",
-                                value="noisy, blurry, soft, deformed, ugly")
-            randomize_seed = gr.Checkbox(label="Randomize seed", value=True)
+    #     with gr.Accordion(open=False, label="Advanced Options"):
+    #         seed = gr.Slider(
+    #             label="Seed",
+    #             minimum=0,
+    #             maximum=MAX_SEED,
+    #             step=1,
+    #             value=42,
+    #         )
+    #         negative_prompt = gr.Textbox(label="Negative Prompt",
+    #                             placeholder="noisy, blurry, soft, deformed, ugly",
+    #                             value="noisy, blurry, soft, deformed, ugly")
+    #         randomize_seed = gr.Checkbox(label="Randomize seed", value=True)
     
-        submit = gr.Button("Submit", variant="primary")
+    #     submit = gr.Button("Submit", variant="primary")
     
-        submit.click(
-            fn=remove_tips,
-            outputs=usage_tips,
-        ).then(
-            fn=randomize_seed_fn,
-            inputs=[seed, randomize_seed],
-            outputs=seed,
-            queue=False,
-            api_name=False,
-        ).then(
-            fn=generate_image,
-            inputs=[prompt, negative_prompt, man, woman, resolution, local_prompt1, local_prompt2, seed, condition, condition_img1, style],
-            outputs=[gallery, gen_condition]
-        )
-    demo.launch(share=True)
+    #     submit.click(
+    #         fn=remove_tips,
+    #         outputs=usage_tips,
+    #     ).then(
+    #         fn=randomize_seed_fn,
+    #         inputs=[seed, randomize_seed],
+    #         outputs=seed,
+    #         queue=False,
+    #         api_name=False,
+    #     ).then(
+    #         fn=generate_image,
+    #         inputs=[prompt, negative_prompt, man, woman, resolution, local_prompt1, local_prompt2, seed, condition, condition_img1, style],
+    #         outputs=[gallery, gen_condition]
+    #     )
+    # demo.launch(share=True)
 
 def parse_args():
     parser = argparse.ArgumentParser('', add_help=False)
