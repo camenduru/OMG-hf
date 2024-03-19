@@ -27,8 +27,8 @@ from diffusers.utils import load_image
 import cv2
 from PIL import Image, ImageOps
 from transformers import DPTFeatureExtractor, DPTForDepthEstimation
-from controlnet_aux import OpenposeDetector
-from controlnet_aux.open_pose.body import Body
+# from controlnet_aux import OpenposeDetector
+# from controlnet_aux.open_pose.body import Body
 
 try:
     from inference.models import YOLOWorld
