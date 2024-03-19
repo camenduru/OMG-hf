@@ -63,7 +63,8 @@ title = r"""
 """
 
 description = r"""
-<b>Official 🤗 Gradio demo</b> for <a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>OMG: Occlusion-friendly Personalized Multi-concept Generation In Diffusion Models</b></a>.<br>
+<b>Official 🤗 Gradio demo</b> for <a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>OMG: Occlusion-friendly Personalized Multi-concept Generation In Diffusion Models</b></a>.<be>
+<a href='https://kongzhecn.github.io/omg-project/' target='_blank'><b>Project</b></a>.<a href='https://github.com/kongzhecn/OMG/' target='_blank'><b>Code</b></a>.<a href='https://arxiv.org/abs/2403.10983/' target='_blank'><b>Arxiv</b></a>.<br>
 How to use:<br>
 1. Select two characters.
 2. Enter a text prompt as done in normal text-to-image models.
@@ -366,7 +367,7 @@ def main(device, segment_type):
         image = Image.fromarray((image * 255.0).clip(0, 255).astype(np.uint8))
         return image
 
-    @spaces.GPU(duration=210)
+    @spaces.GPU(duration=240)
     def generate_image(prompt1, negative_prompt, man, woman, resolution, local_prompt1, local_prompt2, seed, condition, condition_img1, style):
         # try:
         path1 = lorapath_man[man]
